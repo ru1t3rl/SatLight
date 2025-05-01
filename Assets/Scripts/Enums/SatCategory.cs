@@ -3,7 +3,6 @@
     public enum SatCategory
     {
         All = 0,
-        ANY,
         AmateurRadio = 18,
         BeidouNavigationSystem = 35,
         Brightest = 1,
