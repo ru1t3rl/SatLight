@@ -16,21 +16,21 @@ public class SatelliteBehaviour : MonoBehaviour
     private float updateTimeout;
 
     private Coroutine _informationUpdateRoutine = null;
-    private WaitForSeconds timeout = null;
+    private WaitForSeconds _timeout = null;
 
     private IEnumerator UpdateInfo()
     {
         if (!updateLocation)
         {
-            yield return timeout;
+            yield return _timeout;
             yield break;
         }
         
-        timeout ??= new WaitForSeconds(updateTimeout);
+        _timeout ??= new WaitForSeconds(updateTimeout);
 
         // TODO: Make request for new location or other information
 
-        yield return timeout;
+        yield return _timeout;
     }
 
     public void SetSatelliteIno(SatAbove satInfo)
