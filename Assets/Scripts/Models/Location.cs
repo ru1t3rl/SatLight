@@ -6,12 +6,11 @@ namespace SatLight.Models
     [System.Serializable]
     public class Location
     {
+        private const double FlatteningWGS84 = 1.0 / 298.257223563;
+
         private const double Wgs84SemiMajorAxis = 6378137.0;
         private const double Wgs84SemiMinorAxis = 6356752.314245;
-
-        private const double EccentricitySquared = ((Wgs84SemiMajorAxis * Wgs84SemiMajorAxis) -
-                                                    (Wgs84SemiMinorAxis * Wgs84SemiMinorAxis)) /
-                                                   (Wgs84SemiMajorAxis * Wgs84SemiMajorAxis);
+        private const int ECEFReference = 6378137;
 
         public float Latitude { get; } = 0;
         public float Longitude { get; } = 0;
@@ -24,39 +23,36 @@ namespace SatLight.Models
             Altitude = altitude;
         }
 
-        public static Vector3 ToECEFLocation(Location location)
+        public static Vector3 ToEcefLocation(Location location)
         {
-            location = new Location(
+            Location locationInRadians = new Location(
                 location.Latitude * Mathf.Deg2Rad,
                 location.Longitude * Mathf.Deg2Rad,
                 location.Altitude
             );
 
-            double radiusCurvature = Wgs84SemiMajorAxis / Mathf.Sqrt(
-                1 -
-                (float)EccentricitySquared *
-                Mathf.Sin(location.Latitude) *
-                Mathf.Sin(location.Latitude)
-            );
+            double firstEccentricitySquared = 2 * FlatteningWGS84 - (FlatteningWGS84 * FlatteningWGS84);
+            double primeVerticalRadiusOfCurvature = Wgs84SemiMajorAxis /
+                                                    (Math.Sqrt(1 - firstEccentricitySquared *
+                                                        (Math.Sin(locationInRadians.Latitude) * Math.Sin(locationInRadians.Latitude))));
 
             Vector3 ecefLocation = Vector3.zero;
+            ecefLocation.x = (float)((primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
+                                     Math.Cos(locationInRadians.Latitude) *
+                                     Math.Cos(locationInRadians.Longitude));
 
-            ecefLocation.x = (float)(radiusCurvature + location.Altitude) *
-                             Mathf.Cos(location.Latitude) *
-                             Mathf.Cos(location.Longitude);
-            ecefLocation.y = (float)(radiusCurvature + location.Altitude) *
-                             Mathf.Cos(location.Latitude) *
-                             Mathf.Sin(location.Longitude);
-            ecefLocation.z = (float)((Wgs84SemiMinorAxis * Wgs84SemiMinorAxis) /
-                                     (Wgs84SemiMajorAxis * Wgs84SemiMajorAxis) *
-                                     radiusCurvature +
-                                     location.Altitude) *
-                             Mathf.Sin(location.Latitude);
+            ecefLocation.y = (float)((primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
+                                     Math.Cos(locationInRadians.Latitude) *
+                                     Math.Sin(locationInRadians.Longitude));
 
+            ecefLocation.z = (float)(((1 - firstEccentricitySquared) * 
+                                      primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
+                                     Math.Sin(locationInRadians.Latitude));
+            
             return ecefLocation;
         }
 
-        public Vector3 ToECEFLocation() => ToECEFLocation(this);
+        public Vector3 ToEcefLocation() => ToEcefLocation(this);
 
         /// <summary>
         /// Will map to a scale/range of -1 to 1 for all axis
@@ -68,15 +64,13 @@ namespace SatLight.Models
 
         public Vector3 ToUnityCoordinates(Vector3 scale, Quaternion rotationOffset = default)
         {
-            var location = ToECEFLocation();
+            var ecefLocation = ToEcefLocation();
 
             var unityPosition = new Vector3(
-                location.x / 6400000f * scale.x,
-                location.z / 6400000f * scale.y,
-                location.y / 6400000f * scale.z
+                ecefLocation.x / ECEFReference * scale.x,
+                ecefLocation.z / ECEFReference * scale.y,
+                ecefLocation.y / ECEFReference * scale.z
             );
-
-            unityPosition = unityPosition;
 
             return unityPosition;
         }
