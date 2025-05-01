@@ -37,20 +37,20 @@ namespace SatLight.Behaviours
         {
             var satellites = await satGatherer.GetSatellites();
 
-            IEnumerable<SatelliteBehaviour> children = transform.GetComponentsInChildren<SatelliteBehaviour>();
+            IEnumerable<SatelliteBehaviour> children = (satellitesParent ?? transform).GetComponentsInChildren<SatelliteBehaviour>();
 
             foreach (var satellite in satellites)
             {
-                SatelliteBehaviour? child = children.SingleOrDefault(c => c.gameObject.name == $"Sat_{satellite.SatId}");
+                SatelliteBehaviour child = children.SingleOrDefault(c => c.gameObject.name == $"Sat_{satellite.SatId}");
 
-                if (!child)
+                if (child == null)
                 {
                     CreateSatelliteGameObject(satellite);
                 }
                 else
                 {
                     var location = new Location(satellite.SatLat, satellite.SatLng, satellite.SatAlt);
-                    child.transform.localPosition = location.ToUnityCoordinates(
+                    child.transform.position = location.ToUnityCoordinates(
                         (satellitesParent ?? transform).localScale + distanceFromParent,
                         satellitesParent?.localRotation ?? Quaternion.identity);
                     child.SetSatelliteIno(satellite);
