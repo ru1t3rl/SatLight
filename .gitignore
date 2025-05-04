@@ -1,5 +1,6 @@
-/Assets/N2YO_Settings.asset
-/Assets/N2YO_Settings.asset.meta
+# Secrets
+/[Aa]ssets/N2YO_Settings.asset
+/[Aa]ssets/N2YO_Settings.asset.meta
 
 # This .gitignore file should be placed at the root of your Unity project directory
 #

@@ -1,6 +1,6 @@
 {
     "name": "N2YO.Runtime.Utilities",
-    "rootNamespace": "N2YO.Runtime.Utilities",
+    "rootNamespace": "",
     "references": [
         "GUID:64ff12e3e59de4a86912d4332344bb48",
         "GUID:ac4cd4bb105ae983cabd1a8546c7df49"
