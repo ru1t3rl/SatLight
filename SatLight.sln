@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatLight.Editor.Utilities", "SatLight.Editor.Utilities.csproj", "{D789F1AB-5FB3-A233-6B02-A78FD12F68DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N2YO.Runtime.Domain", "N2YO.Runtime.Domain.csproj", "{5B155ED0-0FB9-E097-C4B2-4C1960033D62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru1t3rl.Editor.Utilities", "Ru1t3rl.Editor.Utilities.csproj", "{36F54006-31AD-49EA-E5DF-89F1FE2DD6D7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatLight.Runtime.Utilities", "SatLight.Runtime.Utilities.csproj", "{9AE6FD64-CD62-86D9-A104-610E558E59F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru1t3rl.Runtime.Utilities", "Ru1t3rl.Runtime.Utilities.csproj", "{2985AA92-9D8C-8DFA-87E0-DEFF65FB75E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N2YO.Editor.Controllers", "N2YO.Editor.Controllers.csproj", "{5485CB1F-58AF-6034-AB39-D8FE1695AAEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatLight.Runtime.Behaviours", "SatLight.Runtime.Behaviours.csproj", "{79BD3EAB-ED18-3F35-3FDA-DE9B8DA9FFD0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ru1t3rl.Runtime.Domain", "Ru1t3rl.Runtime.Domain.csproj", "{EFAD170B-69EC-E9C0-462C-3B4BBD1C0505}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SatLight.Runtime.Domain", "SatLight.Runtime.Domain.csproj", "{56EC9874-7FE4-B286-E428-FD62DDA1521F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N2YO.Runtime.Utilities", "N2YO.Runtime.Utilities.csproj", "{971B2774-B582-7C5E-A0BF-4AE8266003FA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "N2YO", "N2YO", "{D6AF2B8A-F347-4089-B48E-BA17F8FE015F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ru1t3rl", "Ru1t3rl", "{1FE0371D-E503-4A60-BB8B-120C4C3D06D3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SatLight", "SatLight", "{A1791F55-036E-45DF-8E62-3D8768C6FB0F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "N2YO.Runtime", "N2YO.Runtime", "{C96EF183-BACE-49DB-9858-C1BCACC2F6DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "N2YO.Editor", "N2YO.Editor", "{79A55CEE-A5F1-4453-A27E-FB0119F92C9A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ru1t3rl.Editor", "Ru1t3rl.Editor", "{F04E7D17-F964-4A46-96D4-CD307EA74255}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ru1t3rl.Runtime", "Ru1t3rl.Runtime", "{3A524191-D2B7-4B8E-A4C2-DEC84A167B9F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SatLight.Editor", "SatLight.Editor", "{960B26D6-85D0-47A6-B8DF-2776BDAE64E3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SatLight.Runtime", "SatLight.Runtime", "{61602226-D60F-49BB-8DED-20C595AEB283}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{d789f1ab-5fb3-a233-6b02-a78fd12f68df}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d789f1ab-5fb3-a233-6b02-a78fd12f68df}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5b155ed0-0fb9-e097-c4b2-4c1960033d62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5b155ed0-0fb9-e097-c4b2-4c1960033d62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36f54006-31ad-49ea-e5df-89f1fe2dd6d7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36f54006-31ad-49ea-e5df-89f1fe2dd6d7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ae6fd64-cd62-86d9-a104-610e558e59f8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ae6fd64-cd62-86d9-a104-610e558e59f8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2985aa92-9d8c-8dfa-87e0-deff65fb75e3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2985aa92-9d8c-8dfa-87e0-deff65fb75e3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5485cb1f-58af-6034-ab39-d8fe1695aaeb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5485cb1f-58af-6034-ab39-d8fe1695aaeb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79bd3eab-ed18-3f35-3fda-de9b8da9ffd0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79bd3eab-ed18-3f35-3fda-de9b8da9ffd0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{efad170b-69ec-e9c0-462c-3b4bbd1c0505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{efad170b-69ec-e9c0-462c-3b4bbd1c0505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56ec9874-7fe4-b286-e428-fd62dda1521f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56ec9874-7fe4-b286-e428-fd62dda1521f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971b2774-b582-7c5e-a0bf-4ae8266003fa}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971b2774-b582-7c5e-a0bf-4ae8266003fa}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C96EF183-BACE-49DB-9858-C1BCACC2F6DF} = {D6AF2B8A-F347-4089-B48E-BA17F8FE015F}
+		{79A55CEE-A5F1-4453-A27E-FB0119F92C9A} = {D6AF2B8A-F347-4089-B48E-BA17F8FE015F}
+		{5485CB1F-58AF-6034-AB39-D8FE1695AAEB} = {79A55CEE-A5F1-4453-A27E-FB0119F92C9A}
+		{5B155ED0-0FB9-E097-C4B2-4C1960033D62} = {C96EF183-BACE-49DB-9858-C1BCACC2F6DF}
+		{971B2774-B582-7C5E-A0BF-4AE8266003FA} = {C96EF183-BACE-49DB-9858-C1BCACC2F6DF}
+		{F04E7D17-F964-4A46-96D4-CD307EA74255} = {1FE0371D-E503-4A60-BB8B-120C4C3D06D3}
+		{3A524191-D2B7-4B8E-A4C2-DEC84A167B9F} = {1FE0371D-E503-4A60-BB8B-120C4C3D06D3}
+		{36F54006-31AD-49EA-E5DF-89F1FE2DD6D7} = {F04E7D17-F964-4A46-96D4-CD307EA74255}
+		{EFAD170B-69EC-E9C0-462C-3B4BBD1C0505} = {3A524191-D2B7-4B8E-A4C2-DEC84A167B9F}
+		{2985AA92-9D8C-8DFA-87E0-DEFF65FB75E3} = {3A524191-D2B7-4B8E-A4C2-DEC84A167B9F}
+		{960B26D6-85D0-47A6-B8DF-2776BDAE64E3} = {A1791F55-036E-45DF-8E62-3D8768C6FB0F}
+		{D789F1AB-5FB3-A233-6B02-A78FD12F68DF} = {960B26D6-85D0-47A6-B8DF-2776BDAE64E3}
+		{61602226-D60F-49BB-8DED-20C595AEB283} = {A1791F55-036E-45DF-8E62-3D8768C6FB0F}
+		{79BD3EAB-ED18-3F35-3FDA-DE9B8DA9FFD0} = {61602226-D60F-49BB-8DED-20C595AEB283}
+		{56EC9874-7FE4-B286-E428-FD62DDA1521F} = {61602226-D60F-49BB-8DED-20C595AEB283}
+		{9AE6FD64-CD62-86D9-A104-610E558E59F8} = {61602226-D60F-49BB-8DED-20C595AEB283}
+	EndGlobalSection
+EndGlobal
