@@ -1,0 +1,14 @@
+{
+    "name": "N2YO.Runtime.Domain",
+    "rootNamespace": "N2YO.Runtime.Domain",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

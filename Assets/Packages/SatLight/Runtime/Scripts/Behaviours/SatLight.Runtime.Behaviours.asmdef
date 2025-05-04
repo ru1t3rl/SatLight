@@ -1,0 +1,19 @@
+{
+    "name": "SatLight.Runtime.Behaviours",
+    "rootNamespace": "SatLight.Runtime.Behaviours",
+    "references": [
+        "GUID:64ff12e3e59de4a86912d4332344bb48",
+        "GUID:683c5dc183df8a680b0a24a3b98f67c7",
+        "GUID:fd307a6651d277ceb84f8e4cc97344a0",
+        "GUID:e06bbaf7715c7251b952032a6355b676"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

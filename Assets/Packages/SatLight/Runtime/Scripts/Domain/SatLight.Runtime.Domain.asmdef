@@ -1,0 +1,14 @@
+{
+    "name": "SatLight.Runtime.Domain",
+    "rootNamespace": "SatLight.Runtime.Domain",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

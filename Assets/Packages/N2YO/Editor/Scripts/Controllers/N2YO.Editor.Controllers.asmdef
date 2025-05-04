@@ -1,0 +1,19 @@
+{
+    "name": "N2YO.Editor.Controllers",
+    "rootNamespace": "N2YO.Editor.Controllers",
+    "references": [
+        "GUID:1187b28d1f8956c1ba6d28db62356a26",
+        "GUID:683c5dc183df8a680b0a24a3b98f67c7"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
