@@ -47,7 +47,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*.sln
+#*.sln
 *.csproj
 
 
