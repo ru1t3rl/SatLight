@@ -148,11 +148,17 @@ namespace SatLight.Utilities
                 return null;
             }
 
-            if (www.downloadHandler.text == "null")
+            if (www.downloadHandler.text.Contains("null"))
             {
                 Logger.LogError($"Received null response. ({url})");
                 return null;
             }
+
+            if (www.downloadHandler.text.Contains("error"))
+            {
+                Logger.LogError($"Received error response ({url}).\r\n{www.downloadHandler.text}");
+                return null;
+            } 
 
             return www.downloadHandler.text;
         }

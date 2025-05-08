@@ -1,5 +1,6 @@
 using System.Threading;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using SatLight.Runtime.Domain;
 using SatLight.Runtime.Domain.Common;
 using SatLight.Utilities;
@@ -16,7 +17,8 @@ namespace SatLight.Runtime.Behaviours
         private SatelliteData _data;
         private CancellationTokenSource _cancellationTokenSource = null;
 
-        [SerializeField, Tooltip("The user settings are used to share the user location between the satellite objects.")] 
+        [CanBeNull, SerializeField,
+         Tooltip("The user settings are used to share the user location between the satellite objects.")]
         private UserSettings userSettings;
 
         private void Awake()
@@ -53,9 +55,9 @@ namespace SatLight.Runtime.Behaviours
 
                 var result = await N2YOController.Instance.GetSatellitePositions(
                     _data.SatInfo.SatId,
-                    userSettings.Location.Latitude,
-                    userSettings.Location.Longitude,
-                    userSettings.Location.Altitude,
+                    userSettings?.Location.Latitude ?? _data.SatInfo.SatLat,
+                    userSettings?.Location.Longitude ?? _data.SatInfo.SatLng,
+                    userSettings?.Location.Altitude ?? _data.SatInfo.SatAlt,
                     1
                 );
 
