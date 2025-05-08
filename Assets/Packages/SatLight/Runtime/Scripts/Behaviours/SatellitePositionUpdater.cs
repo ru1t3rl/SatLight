@@ -1,4 +1,3 @@
-using System;
 using SatLight.Runtime.Domain.Common;
 using UnityEngine;
 
@@ -16,7 +15,12 @@ namespace SatLight.Runtime.Behaviours
 
         private void FixedUpdate()
         {
-            transform.position = _data.Location.ToUnityCoordinates();
+            Vector3 direction = transform.localPosition.normalized;
+            
+            // TODO: Check if we need to fix anything altitude related
+            transform.position = _data.Location.ToUnityCoordinates(
+                direction * (float)(transform.parent.localScale.magnitude + _data.SatInfo.SatAlt) 
+            );
         }
     }
 }
