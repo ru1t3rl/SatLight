@@ -1,9 +1,9 @@
 ﻿using System;
-using SatLight.Models;
+using SatLight.Runtime.Domain.Common;
 
 namespace Ru1t3rl.Models
 {
-    [System.Serializable]
+    [Serializable]
     public class IpLocationResponse
     {
         public string Ip { get; set; }

@@ -33,18 +33,18 @@ namespace SatLight.Models
         /// Satellite footprint latitude (decimal degrees format)
         /// </summary>
         [field: SerializeField]
-        public float SatLat { get; set; }
+        public double SatLat { get; set; }
         
         /// <summary>
         /// Satellite footprint longitude (decimal degrees format)
         /// </summary>
         [field: SerializeField]
-        public float SatLng { get; set; }
+        public double SatLng { get; set; }
         
         /// <summary>
         /// Satellite altitude (km)
         /// </summary>
         [field: SerializeField]
-        public float SatAlt { get; set; }
+        public double SatAlt { get; set; }
     }
 }

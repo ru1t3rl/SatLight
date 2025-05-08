@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Ru1t3rl.Utilities;
+using SatLight.Runtime.Utilities;
 using UnityEditor;
 using UnityEngine;
 using Logger = Ru1t3rl.Utilities.Logger;
 
-namespace Editors.Ru1t3rl.Utilities
+namespace SatLight.Editors.Utilities
 {
     [CustomEditor(typeof(LocationManager))]
     public class LocationManagerEditor : Editor

@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using SatLight.Models;
+using SatLight.Runtime.Domain.Common;
+using SatLight.Runtime.Utilities;
 using UnityEngine;
 
-namespace SatLight.Behaviours
+namespace SatLight.Runtime.Behaviours
 {
     public class SatMapper : MonoBehaviour
     {
@@ -34,13 +36,14 @@ namespace SatLight.Behaviours
 #endif
         private async void UpdateSatellites()
         {
-            var satellites = await satGatherer.GetSatellites();
+            SatAbove[] satellites = await satGatherer.GetSatellites();
 
-            IEnumerable<SatelliteBehaviour> children = (satellitesParent ?? transform).GetComponentsInChildren<SatelliteBehaviour>();
+            IEnumerable<SatelliteData> children =
+                (satellitesParent ?? transform).GetComponentsInChildren<SatelliteData>();
 
             foreach (var satellite in satellites)
             {
-                SatelliteBehaviour child = children.SingleOrDefault(c => c.gameObject.name == $"Sat_{satellite.SatId}");
+                SatelliteData child = children.SingleOrDefault(c => c.gameObject.name == $"Sat_{satellite.SatId}");
 
                 if (child == null)
                 {
@@ -50,9 +53,9 @@ namespace SatLight.Behaviours
                 {
                     var location = new Location(satellite.SatLat, satellite.SatLng, satellite.SatAlt);
                     child.transform.position = location.ToUnityCoordinates(
-                        (satellitesParent ?? transform).localScale + distanceFromParent,
-                        satellitesParent?.localRotation ?? Quaternion.identity);
-                    child.SetSatelliteIno(satellite);
+                        (satellitesParent ?? transform).localScale + distanceFromParent
+                    );
+                    child.SatInfo = satellite;
                 }
             }
         }
@@ -60,16 +63,15 @@ namespace SatLight.Behaviours
         private void CreateSatelliteGameObject(SatAbove satellite)
         {
             Vector3 location = new Location(satellite.SatLat, satellite.SatLng, satellite.SatAlt)
-                .ToUnityCoordinates((satellitesParent ?? transform).localScale + distanceFromParent,
-                    satellitesParent?.localRotation ?? Quaternion.identity);
+                .ToUnityCoordinates((satellitesParent ?? transform).localScale + distanceFromParent);
 
             var satGameObject =
                 Instantiate(satellitePrefab, location, Quaternion.identity, satellitesParent ?? transform);
-            var satBehaviour = satGameObject.GetComponent<SatelliteBehaviour>() ??
-                               satGameObject.AddComponent<SatelliteBehaviour>();
+            var satData = satGameObject.GetComponent<SatelliteData>() ??
+                          satGameObject.AddComponent<SatelliteData>();
 
             satGameObject.name = $"Sat_{satellite.SatId}";
-            satBehaviour?.SetSatelliteIno(satellite);
+            satData.SatInfo = satellite;
         }
     }
 }

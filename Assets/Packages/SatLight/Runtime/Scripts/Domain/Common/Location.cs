@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace SatLight.Models
+namespace SatLight.Runtime.Domain.Common
 {
     [System.Serializable]
     public class Location
@@ -12,11 +12,11 @@ namespace SatLight.Models
         private const double Wgs84SemiMinorAxis = 6356752.314245;
         private const int ECEFReference = 6378137;
 
-        public float Latitude { get; } = 0;
-        public float Longitude { get; } = 0;
-        public float Altitude { get; } = 0;
+        public double Latitude { get; } = 0;
+        public double Longitude { get; } = 0;
+        public double Altitude { get; } = 0;
 
-        public Location(float latitude, float longitude, float altitude = 0)
+        public Location(double latitude, double longitude, double altitude = 0)
         {
             Latitude = latitude;
             Longitude = longitude;
@@ -26,8 +26,8 @@ namespace SatLight.Models
         public static Vector3 ToEcefLocation(Location location)
         {
             Location locationInRadians = new Location(
-                location.Latitude * Mathf.Deg2Rad,
-                location.Longitude * Mathf.Deg2Rad,
+                location.Latitude * (Math.PI/180.0),
+                location.Longitude * (Math.PI/180.0),
                 location.Altitude
             );
 

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using N2YO.Runtime.Domain;
@@ -37,13 +38,13 @@ namespace SatLight.Utilities
         /// <param name="seconds">Number of future positions to return. Each second is a position. Limit 300 seconds</param>
         public async Task<PositionResponse> GetSatellitePositions(
             int id,
-            float observerLat,
-            float observerLng,
-            float observerAlt,
+            double observerLat,
+            double observerLng,
+            double observerAlt,
             int seconds)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
-                                                   $"satellite/positions/{id}/{observerLat}/{observerLng}/{observerAlt}/{seconds}/");
+                                                   $"positions/{id}/{observerLat}/{observerLng}/{observerAlt}/{seconds}/");
             return JsonConvert.DeserializeObject<PositionResponse>(response);
         }
 
@@ -114,9 +115,9 @@ namespace SatLight.Utilities
         /// <param name="searchRadius">Search radius (0-90)</param>
         /// <param name="categoryId">Category id (see table). Use 0 for all categories</param>
         public async Task<AboveResponse> WhatsAbove(
-            float observerLat,
-            float observerLng,
-            float observerAlt,
+            double observerLat,
+            double observerLng,
+            double observerAlt,
             int searchRadius,
             int categoryId
         )
@@ -131,11 +132,25 @@ namespace SatLight.Utilities
         private async Task<string> MakeGetWebRequest(string url)
         {
             var www = UnityWebRequest.Get(AppendAPIKey(url));
-            await www.SendWebRequest();
+
+            try
+            {
+                await www.SendWebRequest();
+            }
+            catch (Exception e)
+            {
+                Logger.LogError(e.Message);
+            }
 
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Logger.LogError(www.error);
+                return null;
+            }
+
+            if (www.downloadHandler.text == "null")
+            {
+                Logger.LogError($"Received null response. ({url})");
                 return null;
             }
 

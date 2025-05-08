@@ -1,15 +1,20 @@
-using Ru1t3rl.Utilities;
+using SatLight.Runtime.Domain;
+using SatLight.Runtime.Utilities;
 using UnityEngine;
 
-public class UserLocationVisual : MonoBehaviour
+namespace SatLight.Runtime.Behaviours
 {
-    [SerializeField]
-    private LocationManager locationManager;
-
-    private async void Awake()
+    public class UserLocationVisual : MonoBehaviour
     {
-        locationManager.InitializeLocationService();
-        var location = await locationManager.GetCurrentLocation(true);
-        transform.position = location.ToUnityCoordinates(transform.parent.localScale);
+        [SerializeField] private LocationManager locationManager;
+        [SerializeField] private UserSettings userSettings;
+
+        private async void Awake()
+        {
+            locationManager.InitializeLocationService();
+            var location = await locationManager.GetCurrentLocation(true);
+            userSettings.SetUserLocation(location);
+            transform.position = location.ToUnityCoordinates(transform.parent.localScale);
+        }
     }
 }

@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Ru1t3rl.Models;
 using SatLight.Enums;
-using SatLight.Models;
+using SatLight.Runtime.Domain.Common;
 using UnityEngine;
 using UnityEngine.Networking;
 using Logger = Ru1t3rl.Utilities.Logger;
 
-namespace Ru1t3rl.Utilities
+namespace SatLight.Runtime.Utilities
 {
     public class LocationManager : MonoBehaviour
     {
@@ -61,8 +61,7 @@ namespace Ru1t3rl.Utilities
 
             if (_locationService.isEnabledByUser)
             {
-                Logger.LogError<LocationManager>(
-                    "You're trying to use the location while location service isn't active on the device");
+                Logger.LogError<LocationManager>("You're trying to use the location while location service isn't active on the device");
                 return;
             }
 
@@ -83,7 +82,6 @@ namespace Ru1t3rl.Utilities
 
             
             var ipLocationJson = JsonConvert.DeserializeObject<IpLocationResponse>(www.downloadHandler.text);
-
             return ipLocationJson;
         }
 

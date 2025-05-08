@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locationManager: {fileID: 1505180663}
+  userSettings: {fileID: 11400000, guid: 7e7752da57660ee0a9b28d4086a76e0e, type: 2}
 --- !u!4 &70005157
 Transform:
   m_ObjectHideFlags: 0
