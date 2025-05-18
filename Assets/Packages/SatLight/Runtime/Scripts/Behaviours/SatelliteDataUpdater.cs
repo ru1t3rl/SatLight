@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
@@ -11,7 +12,7 @@ namespace SatLight.Runtime.Behaviours
     [RequireComponent(typeof(SatelliteData))]
     public class SatelliteDataUpdater : MonoBehaviour
     {
-        [Range(1, 10), SerializeField, Tooltip("Update rate in seconds!")]
+        [Range(1, 300), SerializeField, Tooltip("Update rate in seconds!")]
         private int updateRate;
 
         private SatelliteData _data;
@@ -61,11 +62,11 @@ namespace SatLight.Runtime.Behaviours
                     1
                 );
 
-                _data.UpdateLocation(
-                    result.Positions[0].SatLatitude,
-                    result.Positions[0].SatLongitude,
-                    result.Positions[0].Elevation
-                );
+                _data.EnqueueFutureLocations(result.Positions.Select(p => new Location(
+                    p.SatLatitude,
+                    p.SatLongitude,
+                    p.Elevation
+                )));
             }
         }
     }
