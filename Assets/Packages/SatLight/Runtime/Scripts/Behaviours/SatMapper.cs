@@ -45,7 +45,7 @@ namespace SatLight.Runtime.Behaviours
             {
                 SatelliteData child = children.SingleOrDefault(c => c.gameObject.name == $"Sat_{satellite.SatId}");
 
-                if (child == null)
+                if (child)
                 {
                     CreateSatelliteGameObject(satellite);
                 }
