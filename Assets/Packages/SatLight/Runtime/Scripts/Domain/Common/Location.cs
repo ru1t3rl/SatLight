@@ -74,5 +74,10 @@ namespace SatLight.Runtime.Domain.Common
 
             return unityPosition;
         }
+
+        public override string ToString()
+        {
+            return $"Lat: {Latitude}, Lon: {Longitude}, Alt: {Altitude}";
+        }
     }
 }
