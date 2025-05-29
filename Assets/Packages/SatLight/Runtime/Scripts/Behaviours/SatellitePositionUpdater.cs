@@ -9,9 +9,16 @@ namespace SatLight.Runtime.Behaviours
     [RequireComponent(typeof(SatelliteData))]
     public class SatellitePositionUpdater : MonoBehaviour
     {
-        [SerializeField] private float updateRate = 1f; // The positions in FuturePositions are approximately 1sec apart
+        [SerializeField]
+        [Tooltip("Update rate in seconds.\r\nPositions in FuturePositions are approximately 1sec apart.")]
+        private float updateRate = 1f;
+
         private SatelliteData _data;
-        private CancellationTokenSource _tokenSource = new ();
+        private CancellationTokenSource _tokenSource = new();
+
+        public bool IsActive { get; private set; } = false;
+
+        public float UpdateRateInSeconds => updateRate;
 
         private void Awake()
         {
@@ -39,11 +46,24 @@ namespace SatLight.Runtime.Behaviours
             _tokenSource.Dispose();
         }
 
+        public void SetUpdateRate(float updateRate)
+        {
+            this.updateRate = updateRate;
+        }
+
         private async Task UpdateSatellitePosition(CancellationToken token)
         {
+            IsActive = true;
             while (!token.IsCancellationRequested)
             {
-                await Task.Delay((int)(updateRate * 1000), token);
+                try
+                {
+                    await Task.Delay((int)(updateRate * 1000f), token);
+                }
+                catch (TaskCanceledException)
+                {
+                    break;
+                }
 
                 if (_data.SatInfo == null)
                 {
@@ -52,16 +72,21 @@ namespace SatLight.Runtime.Behaviours
 
                 Location nextLocation = _data.GetNextLocation();
                 _data.UpdateCurrentLocation(nextLocation.Latitude, nextLocation.Longitude, nextLocation.Altitude);
-                
-                Vector3 direction = transform.localPosition.normalized;
+
+                Vector3 direction = _data.Location.ToDirection();
                 try
                 {
-                    transform.position = _data.Location.ToUnityCoordinates(
+                    Vector3 newPosition = _data.Location.ToUnityCoordinates(
                         direction * (float)((transform.parent?.localScale.magnitude ?? 1) + _data.SatInfo.SatAlt)
                     );
+                    transform.position = newPosition;
                 }
-                catch (Exception ex) {Debug.LogError(ex);}
+                catch (Exception ex)
+                {
+                    Debug.LogError(ex);
+                }
             }
+            IsActive = false;
         }
     }
 }

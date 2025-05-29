@@ -26,15 +26,16 @@ namespace SatLight.Runtime.Domain.Common
         public static Vector3 ToEcefLocation(Location location)
         {
             Location locationInRadians = new Location(
-                location.Latitude * (Math.PI/180.0),
-                location.Longitude * (Math.PI/180.0),
+                location.Latitude * (Math.PI / 180.0),
+                location.Longitude * (Math.PI / 180.0),
                 location.Altitude
             );
 
             double firstEccentricitySquared = 2 * FlatteningWGS84 - (FlatteningWGS84 * FlatteningWGS84);
             double primeVerticalRadiusOfCurvature = Wgs84SemiMajorAxis /
                                                     (Math.Sqrt(1 - firstEccentricitySquared *
-                                                        (Math.Sin(locationInRadians.Latitude) * Math.Sin(locationInRadians.Latitude))));
+                                                        (Math.Sin(locationInRadians.Latitude) *
+                                                         Math.Sin(locationInRadians.Latitude))));
 
             Vector3 ecefLocation = Vector3.zero;
             ecefLocation.x = (float)((primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
@@ -45,10 +46,10 @@ namespace SatLight.Runtime.Domain.Common
                                      Math.Cos(locationInRadians.Latitude) *
                                      Math.Sin(locationInRadians.Longitude));
 
-            ecefLocation.z = (float)(((1 - firstEccentricitySquared) * 
-                                      primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
+            ecefLocation.z = (float)(((1 - firstEccentricitySquared) *
+                                         primeVerticalRadiusOfCurvature + locationInRadians.Altitude) *
                                      Math.Sin(locationInRadians.Latitude));
-            
+
             return ecefLocation;
         }
 
@@ -73,6 +74,11 @@ namespace SatLight.Runtime.Domain.Common
             );
 
             return unityPosition;
+        }
+
+        public Vector3 ToDirection()
+        {
+            return ToEcefLocation().normalized;
         }
 
         public override string ToString()
