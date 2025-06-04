@@ -46,7 +46,7 @@ namespace SatLight.Runtime.Utilities
             await GetSatellites();
         }
 
-        public async Task<SatAbove[]> GetSatellites()
+        public virtual async Task<SatAbove[]> GetSatellites()
         {
             var observerLocation = await locationManager.GetCurrentLocation(!useLocationService);
 
