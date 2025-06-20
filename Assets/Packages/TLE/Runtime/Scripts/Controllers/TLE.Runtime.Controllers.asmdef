@@ -1,0 +1,18 @@
+{
+    "name": "TLE.Runtime.Controllers",
+    "rootNamespace": "TLE.Runtime.Controllers",
+    "references": [
+        "GUID:ac4cd4bb105ae983cabd1a8546c7df49",
+        "GUID:ac4cd4bb105ae983cabd1a8546c7df49",
+        "GUID:489705157461a91bd85d5e41db42cb2a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

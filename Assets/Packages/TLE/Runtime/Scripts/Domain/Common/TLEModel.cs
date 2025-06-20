@@ -1,9 +1,6 @@
-using UnityEngine;
-
-// https://tle.ivanstanojevic.me/#operation/record
 namespace TLE.Runtime.Domain
 {
-    public record struct TLERecordResponse(
+    public record TLEModel(
         string @context,
         string @id,
         string @type,

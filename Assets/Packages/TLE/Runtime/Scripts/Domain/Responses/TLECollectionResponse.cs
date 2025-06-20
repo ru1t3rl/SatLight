@@ -1,19 +1,15 @@
+using System;
 using UnityEngine;
 
-namespace TLE.Runtime.Domain
+namespace TLE.Runtime.Domain.Responses
 {
-    public class TLECollectionResponse : MonoBehaviour
-    {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-    }
+    public record TLECollectionResponse(
+        string @context,
+        string @id,
+        string @type,
+        int totalItems,
+        TLEModel[] member,
+        dynamic parameters,
+        dynamic view
+    );
 }

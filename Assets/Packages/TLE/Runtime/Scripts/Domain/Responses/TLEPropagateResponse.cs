@@ -1,19 +1,14 @@
 using UnityEngine;
 
-namespace TLE.Runtime.Domain
+namespace TLE.Runtime.Domain.Responses
 {
-    public class TLEPropagateResponse : MonoBehaviour
-    {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-    }
+    public record TLEPropagateResponse(
+        string @context,
+        string @id,
+        string @type,
+        TLEModel tle,
+        string algorithm,
+        TLETransform vector,
+        TLELocation geodetic
+    );
 }
