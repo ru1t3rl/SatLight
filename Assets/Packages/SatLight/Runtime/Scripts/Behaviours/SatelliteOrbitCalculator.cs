@@ -14,10 +14,10 @@ public class SatelliteOrbitCalculator
 
     private readonly SatAbove _satData;
     private readonly TLEReponse _tleResponse;
+    private readonly List<Location> _orbitPositions = new();
 
     private Tle _satelliteTle;
     private Sgp4 _sgp4;
-    private List<Location> _orbitPositions = new();
 
     public SatelliteOrbitCalculator(SatAbove satData, TLEReponse tleResponse)
     {
@@ -32,7 +32,7 @@ public class SatelliteOrbitCalculator
         _sgp4 = new Sgp4(_satelliteTle);
     }
 
-    public List<Vector3> CalculateOrbitPositions()
+    public List<Location> CalculateOrbitPositions()
     {
         _orbitPositions.Clear();
         double orbitalPeriod = MINTUES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
@@ -51,7 +51,7 @@ public class SatelliteOrbitCalculator
                 geodetic.Longitude.Degrees,
                 geodetic.Altitude
             );
-            
+
             _orbitPositions.Add(location);
         }
 
