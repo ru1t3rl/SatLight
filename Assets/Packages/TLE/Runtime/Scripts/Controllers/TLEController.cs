@@ -1,7 +1,9 @@
 using System;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
+using OneOf;
+using OneOf.Types;
 using Ru1t3rl.Utilities;
 using TLE.Runtime.Domain;
 using TLE.Runtime.Domain.Responses;
@@ -14,30 +16,36 @@ namespace TLE.Runtime.Controllers
     public class TLEController : UnitySingleton<TLEController>
     {
         [SerializeField] private TLESettings settings;
-        
+
         /// <summary>
         /// Return single TleModel for requested satellite id
         /// </summary>
         /// <param name="id">Satellite Id (i.e. 43638)</param>
-        public async Task<TLEModel> GetTLE(int id)
+        public async Task<OneOf<TLEModel, None>> GetTLE(int id)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + id);
-            return JsonConvert.DeserializeObject<TLEModel>(response);
+            return response.Match<OneOf<TLEModel, None>>(
+                response => JsonConvert.DeserializeObject<TLEModel>(response),
+                none => none
+            );
         }
-        
+
         /// <summary>
         /// Return propagation result with satellite position and velocity using SGP4 or SDP4 algorithms
         /// </summary>
         /// <param name="id">Target satellite id for which propagation is calculated</param>
         /// <param name="date">Target date and time</param>
-        public async Task<TLEPropagateResponse> Propagate(int id, DateTime date)
+        public async Task<OneOf<TLEPropagateResponse, None>> Propagate(int id, DateTime date)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + id + $"/propagate?date={date.ToLongDateString()}");
-            return JsonConvert.DeserializeObject<TLEPropagateResponse>(response);
+            return response.Match<OneOf<TLEPropagateResponse, None>>(
+                response => JsonConvert.DeserializeObject<TLEPropagateResponse>(response),
+                none => none
+            );
         }
-        
+
         [ItemCanBeNull]
-        private async Task<string> MakeGetWebRequest(string url)
+        private async Task<OneOf<string, None>> MakeGetWebRequest(string url)
         {
             var www = UnityWebRequest.Get(url);
             www.SetRequestHeader("Accept", "application/json");
@@ -49,7 +57,7 @@ namespace TLE.Runtime.Controllers
                 while (!request.isDone)
                 {
                     await Task.Yield();
-                    Logger.Log($"Waiting for request to complete... ({request.progress}%)");
+                    Logger.Log($"Waiting for request to complete... ({request.progress * 100f}%)");
                 }
             }
             catch (Exception e)
@@ -60,20 +68,20 @@ namespace TLE.Runtime.Controllers
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Logger.LogError(www.error);
-                return null;
+                return new None();
             }
 
             if (www.downloadHandler.text.Contains("null"))
             {
                 Logger.LogError($"Received null response. ({url})");
-                return null;
+                return new None();
             }
 
             if (www.downloadHandler.text.Contains("error"))
             {
                 Logger.LogError($"Received error response ({url}).\r\n{www.downloadHandler.text}");
-                return null;
-            } 
+                return new None();
+            }
 
             return www.downloadHandler.text;
         }

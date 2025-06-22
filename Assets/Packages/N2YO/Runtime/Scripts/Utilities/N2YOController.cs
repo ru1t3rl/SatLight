@@ -139,7 +139,7 @@ namespace SatLight.Utilities
                 while (!request.isDone)
                 {
                     await Task.Yield();
-                    Logger.Log($"Waiting for request to complete... ({request.progress}%)");
+                    Logger.Log($"Waiting for request to complete... ({request.progress * 100f}%)");
                 }
             }
             catch (Exception e)

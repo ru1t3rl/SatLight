@@ -1,5 +1,7 @@
 fileFormatVersion: 2
-guid: ed75d278a0b35624884db04880483916
+guid: 5a6a4c735da67efe99afdbc9d12eb50d
+labels:
+- NuGetForUnity
 PluginImporter:
   externalObjects: {}
   serializedVersion: 3
@@ -17,6 +19,7 @@ PluginImporter:
         Exclude Editor: 0
         Exclude Linux64: 0
         Exclude OSXUniversal: 0
+        Exclude WebGL: 0
         Exclude Win: 0
         Exclude Win64: 0
     Editor:
@@ -33,6 +36,9 @@ PluginImporter:
       enabled: 1
       settings:
         CPU: AnyCPU
+    WebGL:
+      enabled: 1
+      settings: {}
     Win:
       enabled: 1
       settings:
