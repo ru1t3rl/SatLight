@@ -15,11 +15,9 @@ namespace SatLight.Runtime.Utilities
     {
         private const string IP_GEOLOCATION_API = "https://ipinfo.io/json";
 
-        [SerializeField]
-        private StartupMode startupMode = StartupMode.OnAwake;
-        
-        [SerializeField] 
-        private bool useLocationService = true;
+        [SerializeField] private StartupMode startupMode = StartupMode.OnAwake;
+
+        [SerializeField] private bool useLocationService = true;
 
         private bool _locationServiceInitialized = false;
 
@@ -36,7 +34,7 @@ namespace SatLight.Runtime.Utilities
             {
                 return;
             }
-            
+
             InitializeLocationService();
         }
 
@@ -61,7 +59,8 @@ namespace SatLight.Runtime.Utilities
 
             if (_locationService.isEnabledByUser)
             {
-                Logger.LogError<LocationManager>("You're trying to use the location while location service isn't active on the device");
+                Logger.LogError<LocationManager>(
+                    "You're trying to use the location while location service isn't active on the device");
                 return;
             }
 
@@ -69,19 +68,40 @@ namespace SatLight.Runtime.Utilities
             _locationServiceInitialized = true;
         }
 
+        /// <summary>
+        /// Retrieves the geographical location using the IPv4 address of the device by making a request
+        /// to an external IP geolocation API.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="Location"/> object representing the geographical coordinates (latitude, longitude, and optional altitude)
+        /// obtained from the API response.
+        /// </returns>
+        /// <exception cref="WebException">
+        /// Thrown if there is an error in the web request or the response indicates a failure.
+        /// </exception>
         private async Task<Location> GetLocationWithIPv4()
         {
             var www = UnityWebRequest.Get(IP_GEOLOCATION_API);
-            await www.SendWebRequest();
+
+            var request = www.SendWebRequest();
+            while (!request.isDone)
+            {
+                await Task.Yield();
+                Logger.Log($"Waiting for request to complete... ({request.progress * 100f}%)");
+            }
 
             if (www.result != UnityWebRequest.Result.Success)
             {
                 Logger.LogError(www.error);
                 throw new WebException(www.error);
             }
-
             
-            var ipLocationJson = JsonSerializer.Deserialize<IpLocationResponse>(www.downloadHandler.text);
+            JsonSerializerOptions serializerOptions = new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+            
+            var ipLocationJson = JsonSerializer.Deserialize<IpLocationResponse>(www.downloadHandler.text, serializerOptions);
             return ipLocationJson;
         }
 

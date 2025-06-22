@@ -14,6 +14,10 @@ namespace SatLight.Utilities
     public class N2YOController : UnitySingleton<N2YOController>
     {
         [SerializeField] private N2YOSettings settings;
+        private readonly JsonSerializerOptions _serializerOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         /// <summary>
         /// Retrieve the Two Line Elements (TLE) for a satellite identified by NORAD id
@@ -22,7 +26,7 @@ namespace SatLight.Utilities
         public async Task<TLEReponse> GetTLE(int id)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + $"tle/{id}");
-            return JsonSerializer.Deserialize<TLEReponse>(response);
+            return JsonSerializer.Deserialize<TLEReponse>(response, _serializerOptions);
         }
 
         /// <summary>
@@ -45,7 +49,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"positions/{id}/{observerLat}/{observerLng}/{observerAlt}/{seconds}/");
-            return JsonSerializer.Deserialize<PositionResponse>(response);
+            return JsonSerializer.Deserialize<PositionResponse>(response, _serializerOptions);
         }
 
         /// <summary>
@@ -71,7 +75,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"visualpasses/{id}/{observerLat}/{observerLng}/{observerAlt}/{days}/{minVisibility}");
-            return JsonSerializer.Deserialize<VisualPassesResponse>(response);
+            return JsonSerializer.Deserialize<VisualPassesResponse>(response, _serializerOptions);
         }
 
         /// <summary>
@@ -98,7 +102,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"radiopasses/{id}/{observerLat}/{observerLng}/{observerAlt}/{days}/{minElevation}");
-            return JsonSerializer.Deserialize<RadioPassesResponse>(response);
+            return JsonSerializer.Deserialize<RadioPassesResponse>(response, _serializerOptions);
         }
 
         /// <summary>
@@ -125,7 +129,7 @@ namespace SatLight.Utilities
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"above/{observerLat}/{observerLng}/{observerAlt}/{searchRadius}/{categoryId}");
 
-            return JsonSerializer.Deserialize<AboveResponse>(response);
+            return JsonSerializer.Deserialize<AboveResponse>(response, _serializerOptions);
         }
 
         [ItemCanBeNull]

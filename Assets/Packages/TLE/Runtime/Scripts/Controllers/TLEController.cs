@@ -16,6 +16,10 @@ namespace TLE.Runtime.Controllers
     public class TLEController : UnitySingleton<TLEController>
     {
         [SerializeField] private TLESettings settings;
+        private readonly JsonSerializerOptions _serializerOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
         /// <summary>
         /// Return single TleModel for requested satellite id
@@ -27,7 +31,7 @@ namespace TLE.Runtime.Controllers
             
             
             return response.Match<OneOf<TLEModel, None>>(
-                model => JsonSerializer.Deserialize<TLEModel>(model),
+                model => JsonSerializer.Deserialize<TLEModel>(model, _serializerOptions),
                 none => none
             );
         }
@@ -41,7 +45,7 @@ namespace TLE.Runtime.Controllers
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + id + $"/propagate?date={date.ToLongDateString()}");
             return response.Match<OneOf<TLEPropagateResponse, None>>(
-                model => JsonSerializer.Deserialize<TLEPropagateResponse>(model),
+                model => JsonSerializer.Deserialize<TLEPropagateResponse>(model, _serializerOptions),
                 none => none
             );
         }
