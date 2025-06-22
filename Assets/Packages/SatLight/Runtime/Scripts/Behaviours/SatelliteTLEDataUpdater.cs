@@ -18,7 +18,7 @@ namespace SatLight.Runtime.Behaviours
         {
             base.Awake();
             await InitTLE();
-            
+
             _orbitCalculator = new(_data.SatInfo, _tle);
         }
 
@@ -36,10 +36,11 @@ namespace SatLight.Runtime.Behaviours
             };
         }
 
-        protected override async Task UpdateInfo(CancellationToken cancellationToken)
+        protected override Task UpdateInfo(CancellationToken cancellationToken)
         {
-            var orbitPositions = _orbitCalculator.CalculateOrbitPositions();
+            var orbitPositions = _orbitCalculator.CalculateOrbitPositions(updateRate);
             _data.EnqueueFutureLocations(orbitPositions);
+            return Task.CompletedTask;
         }
     }
 }

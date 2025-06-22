@@ -34,7 +34,7 @@ public class SatelliteOrbitCalculator
         _sgp4 = new Sgp4(_satelliteTle);
     }
 
-    public List<Location> CalculateOrbitPositions()
+    public List<Location> CalculateAllOrbitPositions()
     {
         _orbitPositions.Clear();
         double orbitalPeriod = MINTUES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
@@ -45,18 +45,43 @@ public class SatelliteOrbitCalculator
         {
             double timeOffset = (i * orbitalPeriod) / degreesInCircle;
             DateTime predictionTime = DateTime.UtcNow.AddMinutes(timeOffset);
-
-            EciCoordinate position = _sgp4.FindPosition(predictionTime);
-            GeodeticCoordinate geodetic = position.ToGeodetic();
-            Location location = new Location(
-                geodetic.Latitude.Degrees,
-                geodetic.Longitude.Degrees,
-                geodetic.Altitude
-            );
-
+            
+            Location location = CalculateOrbitPosition(predictionTime);
             _orbitPositions.Add(location);
         }
 
         return _orbitPositions;
+    }
+    
+    public List<Location> CalculateOrbitPositions(float timeDuration)
+    {
+        _orbitPositions.Clear();
+        double orbitalPeriod = MINTUES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
+        
+        double portionOfOrbit = timeDuration / orbitalPeriod;
+        int numberOfPoints = Math.Max(2, (int)(360 * portionOfOrbit));
+    
+        for (int i = 0; i < numberOfPoints; i++)
+        {
+            // Calculate time offset for this point
+            double timeOffset = (i * timeDuration) / (numberOfPoints - 1);
+            DateTime predictionTime = DateTime.UtcNow.AddMinutes(timeOffset);
+
+            Location location = CalculateOrbitPosition(predictionTime);
+            _orbitPositions.Add(location);
+        }
+
+        return _orbitPositions;
+    }
+
+    private Location CalculateOrbitPosition(DateTime time)
+    {
+        EciCoordinate position = _sgp4.FindPosition(time);
+        GeodeticCoordinate geodetic = position.ToGeodetic();
+        return new Location(
+            geodetic.Latitude.Degrees,
+            geodetic.Longitude.Degrees,
+            geodetic.Altitude
+        );
     }
 }
