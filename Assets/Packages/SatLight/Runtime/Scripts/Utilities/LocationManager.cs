@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
+using System.Text.Json;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Ru1t3rl.Models;
 using SatLight.Enums;
 using SatLight.Runtime.Domain.Common;
@@ -81,7 +81,7 @@ namespace SatLight.Runtime.Utilities
             }
 
             
-            var ipLocationJson = JsonConvert.DeserializeObject<IpLocationResponse>(www.downloadHandler.text);
+            var ipLocationJson = JsonSerializer.Deserialize<IpLocationResponse>(www.downloadHandler.text);
             return ipLocationJson;
         }
 

@@ -1,8 +1,8 @@
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using N2YO.Runtime.Domain;
-using Newtonsoft.Json;
 using SatLight.Models.Responses;
 using Ru1t3rl.Utilities;
 using UnityEngine;
@@ -22,7 +22,7 @@ namespace SatLight.Utilities
         public async Task<TLEReponse> GetTLE(int id)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + $"tle/{id}");
-            return JsonConvert.DeserializeObject<TLEReponse>(response);
+            return JsonSerializer.Deserialize<TLEReponse>(response);
         }
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"positions/{id}/{observerLat}/{observerLng}/{observerAlt}/{seconds}/");
-            return JsonConvert.DeserializeObject<PositionResponse>(response);
+            return JsonSerializer.Deserialize<PositionResponse>(response);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"visualpasses/{id}/{observerLat}/{observerLng}/{observerAlt}/{days}/{minVisibility}");
-            return JsonConvert.DeserializeObject<VisualPassesResponse>(response);
+            return JsonSerializer.Deserialize<VisualPassesResponse>(response);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace SatLight.Utilities
         {
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"radiopasses/{id}/{observerLat}/{observerLng}/{observerAlt}/{days}/{minElevation}");
-            return JsonConvert.DeserializeObject<RadioPassesResponse>(response);
+            return JsonSerializer.Deserialize<RadioPassesResponse>(response);
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace SatLight.Utilities
             var response = await MakeGetWebRequest(settings.ApiUrl +
                                                    $"above/{observerLat}/{observerLng}/{observerAlt}/{searchRadius}/{categoryId}");
 
-            return JsonConvert.DeserializeObject<AboveResponse>(response);
+            return JsonSerializer.Deserialize<AboveResponse>(response);
         }
 
         [ItemCanBeNull]

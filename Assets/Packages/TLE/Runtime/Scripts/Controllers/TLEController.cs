@@ -1,7 +1,7 @@
 using System;
+using System.Text.Json;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
-using Newtonsoft.Json;
 using OneOf;
 using OneOf.Types;
 using Ru1t3rl.Utilities;
@@ -24,8 +24,10 @@ namespace TLE.Runtime.Controllers
         public async Task<OneOf<TLEModel, None>> GetTLE(int id)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + id);
+            
+            
             return response.Match<OneOf<TLEModel, None>>(
-                response => JsonConvert.DeserializeObject<TLEModel>(response),
+                model => JsonSerializer.Deserialize<TLEModel>(model),
                 none => none
             );
         }
@@ -39,7 +41,7 @@ namespace TLE.Runtime.Controllers
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + id + $"/propagate?date={date.ToLongDateString()}");
             return response.Match<OneOf<TLEPropagateResponse, None>>(
-                response => JsonConvert.DeserializeObject<TLEPropagateResponse>(response),
+                model => JsonSerializer.Deserialize<TLEPropagateResponse>(model),
                 none => none
             );
         }
