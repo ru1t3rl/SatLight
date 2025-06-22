@@ -23,6 +23,8 @@ public class SatelliteOrbitCalculator
     {
         _satData = satData;
         _tleResponse = tleResponse;
+        
+        InitializeSatellite();
     }
 
     private void InitializeSatellite()

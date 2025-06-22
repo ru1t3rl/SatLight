@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 6438402444087378971}
   - component: {fileID: 619953121825286912}
   - component: {fileID: 7359170269523531183}
-  - component: {fileID: 8808905334349410643}
   - component: {fileID: 6114597942958502997}
+  - component: {fileID: 8808905334349410643}
+  - component: {fileID: 2864674474011412766}
   m_Layer: 0
   m_Name: Satellite
   m_TagString: Untagged
@@ -65,6 +66,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -86,6 +89,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -123,20 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922b1b0a6375c886fbe9b76bd4b02db9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8808905334349410643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4566444502066555331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f36b162159e46739a470534adebc82d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateRate: 1
-  userSettings: {fileID: 11400000, guid: 7e7752da57660ee0a9b28d4086a76e0e, type: 2}
 --- !u!114 &6114597942958502997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,3 +139,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41461589e7034a82825a43e257a54847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  updateRate: 1
+--- !u!114 &8808905334349410643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4566444502066555331}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f36b162159e46739a470534adebc82d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateRate: 1
+  userSettings: {fileID: 11400000, guid: 7e7752da57660ee0a9b28d4086a76e0e, type: 2}
+--- !u!114 &2864674474011412766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4566444502066555331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847f2a96076ef3560ae0fba30f7ca3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: SatLight.Runtime.Behaviours::SatLight.Runtime.Behaviours.SatelliteTLEDataUpdater
+  updateRate: 1
+  userSettings: {fileID: 11400000, guid: 7e7752da57660ee0a9b28d4086a76e0e, type: 2}
