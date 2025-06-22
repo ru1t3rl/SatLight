@@ -2,7 +2,7 @@
 using SatLight.Utilities;
 using UnityEditor;
 
-namespace Editors.SatLight.Utilities
+namespace Editors.N2YO.Controllers
 {
     [CustomEditor(typeof(N2YOController))]
     public class N2YOControllerEditor : BaseControllerEditor<N2YOController>

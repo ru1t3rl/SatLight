@@ -24,19 +24,7 @@ namespace TLE.Runtime.Controllers
             var response = await MakeGetWebRequest(settings.ApiUrl + id);
             return JsonConvert.DeserializeObject<TLEModel>(response);
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        // public async Task<TLECollectionResponse> GetTLECollection(
-        //     
-        //     )
-        // {
-        //     var response = await MakeGetWebRequest(settings.ApiUrl);
-        //     return response;
-        // }
-
+        
         /// <summary>
         /// Return propagation result with satellite position and velocity using SGP4 or SDP4 algorithms
         /// </summary>

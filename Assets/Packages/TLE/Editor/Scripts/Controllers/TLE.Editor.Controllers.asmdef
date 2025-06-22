@@ -1,0 +1,4 @@
+{
+	"name": "TLE.Editor.Controllers",
+	"references":[ "GUID:9473a6098956a331c9a6cba5bcdb0156", "GUID:1187b28d1f8956c1ba6d28db62356a26" ]
+}
