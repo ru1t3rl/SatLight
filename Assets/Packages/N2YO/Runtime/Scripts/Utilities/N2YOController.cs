@@ -135,11 +135,16 @@ namespace SatLight.Utilities
 
             try
             {
-                await www.SendWebRequest();
+                var request = www.SendWebRequest();
+                while (!request.isDone)
+                {
+                    await Task.Yield();
+                    Logger.Log($"Waiting for request to complete... ({request.progress}%)");
+                }
             }
             catch (Exception e)
             {
-                Logger.LogError(e.Message);
+                Logger.LogError(e.ToString());
             }
 
             if (www.result != UnityWebRequest.Result.Success)

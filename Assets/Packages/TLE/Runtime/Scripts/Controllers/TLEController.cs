@@ -40,14 +40,21 @@ namespace TLE.Runtime.Controllers
         private async Task<string> MakeGetWebRequest(string url)
         {
             var www = UnityWebRequest.Get(url);
+            www.SetRequestHeader("Accept", "application/json");
+            www.SetRequestHeader("User-Agent", "UnityClient/1.0");
 
             try
             {
-                await www.SendWebRequest();
+                var request = www.SendWebRequest();
+                while (!request.isDone)
+                {
+                    await Task.Yield();
+                    Logger.Log($"Waiting for request to complete... ({request.progress}%)");
+                }
             }
             catch (Exception e)
             {
-                Logger.LogError(e.Message);
+                Logger.LogError(e.ToString());
             }
 
             if (www.result != UnityWebRequest.Result.Success)
