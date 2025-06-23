@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using SatLight.Models;
+using N2YO.Runtime.Domain.Common;
 using SatLight.Runtime.Domain.Common;
 using SatLight.Runtime.Utilities;
 using UnityEngine;

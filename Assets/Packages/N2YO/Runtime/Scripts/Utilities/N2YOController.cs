@@ -3,7 +3,8 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using JetBrains.Annotations;
 using N2YO.Runtime.Domain;
-using SatLight.Models.Responses;
+using N2YO.Runtime.Domain.Enums;
+using N2YO.Runtime.Domain.Responses;
 using Ru1t3rl.Utilities;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -16,17 +17,18 @@ namespace SatLight.Utilities
         [SerializeField] private N2YOSettings settings;
         private readonly JsonSerializerOptions _serializerOptions = new()
         {
-            PropertyNameCaseInsensitive = true
+            PropertyNameCaseInsensitive = true,
+            Converters = { new SatCategoryConverter() }
         };
 
         /// <summary>
         /// Retrieve the Two Line Elements (TLE) for a satellite identified by NORAD id
         /// </summary>
         /// <param name="id">NORAD id</param>
-        public async Task<TLEReponse> GetTLE(int id)
+        public async Task<TLEResponse> GetTLE(int id)
         {
             var response = await MakeGetWebRequest(settings.ApiUrl + $"tle/{id}");
-            return JsonSerializer.Deserialize<TLEReponse>(response, _serializerOptions);
+            return JsonSerializer.Deserialize<TLEResponse>(response, _serializerOptions);
         }
 
         /// <summary>
@@ -132,6 +134,7 @@ namespace SatLight.Utilities
             return JsonSerializer.Deserialize<AboveResponse>(response, _serializerOptions);
         }
 
+        
         [ItemCanBeNull]
         private async Task<string> MakeGetWebRequest(string url)
         {

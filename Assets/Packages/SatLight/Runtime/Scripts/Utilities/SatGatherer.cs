@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
+using N2YO.Runtime.Domain.Common;
+using N2YO.Runtime.Domain.Enums;
+using N2YO.Runtime.Domain.Responses;
 using SatLight.Enums;
-using SatLight.Models;
-using SatLight.Models.Responses;
 using SatLight.Utilities;
 using UnityEngine;
 

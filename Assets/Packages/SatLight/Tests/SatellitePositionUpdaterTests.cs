@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using N2YO.Runtime.Domain.Common;
 using NUnit.Framework;
-using SatLight.Models;
 using SatLight.Runtime.Behaviours;
 using SatLight.Runtime.Domain.Common;
 using UnityEngine;
 using UnityEngine.TestTools;
+using Object = UnityEngine.Object;
 
 public class SatellitePositionUpdaterTests
 {
@@ -40,7 +41,7 @@ public class SatellitePositionUpdaterTests
     [UnityTearDown]
     public IEnumerator TearDown()
     {
-        UnityEngine.Object.Destroy(_satellite);
+        Object.Destroy(_satellite);
         yield return null;
     }
 
@@ -84,9 +85,9 @@ public class SatellitePositionUpdaterTests
 
         yield return new WaitForSeconds(_positionUpdater.UpdateRateInSeconds);
         yield return null;
-        
+
         _positionUpdater.enabled = false;
-        
+
         yield return new WaitForSeconds(_positionUpdater.UpdateRateInSeconds);
         yield return null;
 
@@ -122,7 +123,7 @@ public class SatellitePositionUpdaterTests
         _positionUpdater.enabled = false;
         yield return new WaitForSeconds(1f);
         Assert.IsFalse(_positionUpdater.IsActive);
-        
+
         _data.EnqueueFutureLocations(futureLocations);
         _positionUpdater.enabled = true;
 
@@ -139,7 +140,7 @@ public class SatellitePositionUpdaterTests
         Assert.AreEqual(futureLocations[1].Latitude, _data.Location.Latitude);
         Assert.AreEqual(futureLocations[1].Longitude, _data.Location.Longitude);
         Assert.AreEqual(futureLocations[1].Altitude, _data.Location.Altitude);
-        
+
         yield return new WaitForSeconds(updateRate);
         yield return null;
 

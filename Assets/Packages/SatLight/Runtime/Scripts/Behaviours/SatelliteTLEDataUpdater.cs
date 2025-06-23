@@ -1,7 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
-using SatLight.Models;
-using SatLight.Models.Responses;
+using N2YO.Runtime.Domain.Factories;
+using N2YO.Runtime.Domain.Responses;
 using SatLight.Runtime.Domain.Common;
 using TLE.Runtime.Controllers;
 using UnityEngine;
@@ -11,7 +11,7 @@ namespace SatLight.Runtime.Behaviours
     [RequireComponent(typeof(SatelliteData))]
     public class SatelliteTLEDataUpdater : SatelliteDataUpdaterBase
     {
-        private TLEReponse _tle;
+        private TLEResponse _tle;
         private SatelliteOrbitCalculator _orbitCalculator;
 
         private CancellationTokenSource _cancellationTokenSource = null;
@@ -53,23 +53,13 @@ namespace SatLight.Runtime.Behaviours
             if (result.TryPickT1(out _, out var model))
             {
                 gameObject.SetActive(false);
+                return false;
             }
 
-            return result.Match<bool>(model =>
-                {
-                    _tle = new TLEReponse
-                    {
-                        Info = new SatInfo
-                        {
-                            SatId = _data.SatInfo.SatId,
-                            SatName = _data.SatInfo.SatName,
-                        },
-                        Tle = $"{model.line1}\r\n{model.line2}"
-                    };
-                    return true;
-                },
-                _ => false
-            );
+            var info = SatInfoFactory.Create(_data.SatInfo.SatId, _data.SatInfo.SatName);
+            _tle = TLEResponseFactory.Create(info, model.line1, model.line2);
+            
+            return true;
         }
 
         protected override Task UpdateInfo(CancellationToken cancellationToken)

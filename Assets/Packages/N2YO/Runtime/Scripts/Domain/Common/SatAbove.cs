@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SatLight.Models
+namespace N2YO.Runtime.Domain.Common
 {
     [System.Serializable]
     public class SatAbove

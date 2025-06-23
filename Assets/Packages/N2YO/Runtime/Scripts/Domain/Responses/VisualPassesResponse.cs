@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using N2YO.Runtime.Domain.Common;
+using UnityEngine;
 
-namespace SatLight.Models.Responses
+namespace N2YO.Runtime.Domain.Responses
 {
     [System.Serializable]
     public class VisualPassesResponse

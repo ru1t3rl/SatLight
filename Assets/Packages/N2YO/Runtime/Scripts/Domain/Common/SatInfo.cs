@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SatLight.Models
+namespace N2YO.Runtime.Domain.Common
 {
     [System.Serializable]
     public class SatInfo
@@ -22,5 +22,9 @@ namespace SatLight.Models
         /// </summary>
         [field: SerializeField]
         public int TransactionCount { get; set; }
+
+        internal SatInfo()
+        {
+        }
     }
 }

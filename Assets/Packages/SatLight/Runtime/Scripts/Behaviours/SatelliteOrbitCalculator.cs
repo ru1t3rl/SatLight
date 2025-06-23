@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
-using SatLight.Models;
-using SatLight.Models.Responses;
+using N2YO.Runtime.Domain.Common;
+using N2YO.Runtime.Domain.Responses;
 using SatLight.Runtime.Domain.Common;
 using SGPdotNET.CoordinateSystem;
-using UnityEngine;
 using SGPdotNET.Propagation;
 using SGPdotNET.TLE;
 
@@ -13,13 +12,13 @@ public class SatelliteOrbitCalculator
     private const double MINTUES_IN_A_DAY = 1440.0;
 
     private readonly SatAbove _satData;
-    private readonly TLEReponse _tleResponse;
+    private readonly TLEResponse _tleResponse;
     private readonly List<Location> _orbitPositions = new();
 
     private Tle _satelliteTle;
     private Sgp4 _sgp4;
 
-    public SatelliteOrbitCalculator(SatAbove satData, TLEReponse tleResponse)
+    public SatelliteOrbitCalculator(SatAbove satData, TLEResponse tleResponse)
     {
         _satData = satData;
         _tleResponse = tleResponse;

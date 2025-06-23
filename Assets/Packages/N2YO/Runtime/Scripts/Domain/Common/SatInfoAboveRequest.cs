@@ -1,8 +1,8 @@
 ﻿using System;
-using SatLight.Enums;
+using N2YO.Runtime.Domain.Enums;
 using UnityEngine;
 
-namespace SatLight.Models
+namespace N2YO.Runtime.Domain.Common
 {
     [Serializable]
     public class SatInfoAboveRequest

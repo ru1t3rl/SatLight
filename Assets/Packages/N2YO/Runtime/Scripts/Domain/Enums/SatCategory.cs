@@ -1,5 +1,8 @@
-﻿namespace SatLight.Enums
+﻿using System.Text.Json.Serialization;
+
+namespace N2YO.Runtime.Domain.Enums
 {
+    [JsonConverter(typeof(SatCategoryConverter))]
     public enum SatCategory
     {
         All = 0,
@@ -30,6 +33,7 @@
         Iridium = 15,
         IRNSS = 46,
         ISS = 2,
+        Kuiper = 56,
         Lemur = 49,
         Military = 30,
         Molniya = 14,
@@ -39,6 +43,7 @@
         OneWeb = 53,
         Orbcomm = 16,
         Parus = 38,
+        Qianfan = 55,
         QZSS = 47,
         RadarCalibration = 31,
         Raduga = 13,

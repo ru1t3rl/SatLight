@@ -1,9 +1,10 @@
-﻿using Unity.VisualScripting;
+﻿using System;
+using N2YO.Runtime.Domain.Common;
 using UnityEngine;
 
-namespace SatLight.Models.Responses
+namespace N2YO.Runtime.Domain.Responses
 {
-    [System.Serializable]
+    [Serializable]
     public class RadioPassesResponse
     {
         [field: SerializeField]

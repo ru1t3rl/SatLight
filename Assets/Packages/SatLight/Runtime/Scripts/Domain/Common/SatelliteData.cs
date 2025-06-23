@@ -1,6 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using SatLight.Models;
+using N2YO.Runtime.Domain.Common;
 using UnityEngine;
 using Logger = Ru1t3rl.Utilities.Logger;
 
@@ -9,7 +8,8 @@ namespace SatLight.Runtime.Domain.Common
     public class SatelliteData : MonoBehaviour
     {
         private SatAbove _satInfo;
-        private readonly Queue<Location> _futurePositions = new ();
+        private readonly Queue<Location> _futurePositions = new();
+        private readonly List<Location> _orbitPositions;
 
         public SatAbove SatInfo
         {
@@ -27,11 +27,19 @@ namespace SatLight.Runtime.Domain.Common
             }
         }
 
+        public List<Location> OrbitPositions => _orbitPositions;
+
         public Location Location => new(
             _satInfo.SatLat,
             _satInfo.SatLng,
             _satInfo.SatAlt
         );
+
+        public void SetOrbitPositions(List<Location> orbitPositions)
+        {
+            _orbitPositions.Clear();
+            _orbitPositions.AddRange(orbitPositions);
+        }
 
         public void UpdateCurrentLocation(double latitude, double longitude, double altitude)
         {
