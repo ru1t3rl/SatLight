@@ -9,7 +9,7 @@ namespace SatLight.Runtime.Domain.Common
     {
         private SatAbove _satInfo;
         private readonly Queue<Location> _futurePositions = new();
-        private readonly List<Location> _orbitPositions;
+        private readonly List<Location> _orbitPositions = new();
 
         public SatAbove SatInfo
         {

@@ -9,8 +9,8 @@ using SGPdotNET.TLE;
 
 public class SatelliteOrbitCalculator
 {
-    private const double MINTUES_IN_A_DAY = 1440.0;
-
+    // private const double MINTUES_IN_A_DAY = 1440.0;
+    private const double MINUTES_IN_A_DAY = 2880.0;
     private readonly SatAbove _satData;
     private readonly TLEResponse _tleResponse;
     private readonly List<Location> _orbitPositions = new();
@@ -36,7 +36,7 @@ public class SatelliteOrbitCalculator
     public List<Location> CalculateAllOrbitPositions()
     {
         _orbitPositions.Clear();
-        double orbitalPeriod = MINTUES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
+        double orbitalPeriod = MINUTES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
 
         // 360 degrees in a circle
         int degreesInCircle = 360;
@@ -55,7 +55,7 @@ public class SatelliteOrbitCalculator
     public List<Location> CalculateOrbitPositions(float timeDuration)
     {
         _orbitPositions.Clear();
-        double orbitalPeriod = MINTUES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
+        double orbitalPeriod = MINUTES_IN_A_DAY / _satelliteTle.MeanMotionRevPerDay;
         
         double portionOfOrbit = timeDuration / orbitalPeriod;
         int numberOfPoints = Math.Max(2, (int)(360 * portionOfOrbit));
