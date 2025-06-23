@@ -64,6 +64,11 @@ namespace SatLight.Runtime.Behaviours
 
         protected override Task UpdateInfo(CancellationToken cancellationToken)
         {
+            if (_orbitCalculator == null || !_data)
+            {
+                return Task.CompletedTask;
+            }
+            
             var orbitPositions = _orbitCalculator.CalculateOrbitPositions(updateRate);
             _data.EnqueueFutureLocations(orbitPositions);
             return Task.CompletedTask;
