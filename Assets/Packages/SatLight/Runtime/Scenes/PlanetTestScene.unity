@@ -761,7 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startupMode: 2
   satController: {fileID: 270108672}
-  satCategory: 20
+  satCategory: 52
   radius: 90
   locationManager: {fileID: 1505180663}
   useLocationService: 0

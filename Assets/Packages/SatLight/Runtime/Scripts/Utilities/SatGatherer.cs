@@ -19,6 +19,8 @@ namespace SatLight.Runtime.Utilities
 
         [SerializeField, Range(0, 360)] private int radius = 15;
 
+        [SerializeField] private bool useDataStore = true;
+
         [Header("Location Settings")] [SerializeField]
         private LocationManager locationManager;
 
