@@ -763,6 +763,7 @@ MonoBehaviour:
   satController: {fileID: 270108672}
   satCategory: 52
   radius: 90
+  useDataStore: 1
   locationManager: {fileID: 1505180663}
   useLocationService: 0
 --- !u!4 &1133919023

@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:Foldout text="Foldout">
+        <ui:TextField label="Name" placeholder-text="Preset Name" binding-path="Name" />
+        <uie:ObjectField label="Font Family" binding-path="Value.Font" type="TMPro.TMP_FontAsset, Unity.TextMeshPro" style="height: 31px;" />
+        <ui:FloatField label="Font Size" value="12" binding-path="Value.Size" />
+    </ui:Foldout>
+</ui:UXML>
