@@ -1,4 +1,4 @@
-namespace StyleSmith.Editor
+namespace StyleSmith.Editor.Extensions
 {
     public static class StringExtensions
     {

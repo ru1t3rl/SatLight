@@ -1,8 +1,9 @@
 using StyleSmith.Runtime.Domain;
+using StyleSmith.Editor.Extensions;
 using UnityEditor;
 using UnityEngine;
 
-namespace StyleSmith.Editor
+namespace StyleSmith.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(ColorOption))]
     public class ColorOptionPropertyDrawer : PropertyDrawer

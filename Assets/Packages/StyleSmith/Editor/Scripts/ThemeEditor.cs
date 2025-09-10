@@ -1,123 +1,76 @@
-using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Text.RegularExpressions;
+using JetBrains.Annotations;
 using StyleSmith.Runtime.Domain;
-using Unity.Properties;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UEditor = UnityEditor.Editor;
 
-// [CustomEditor(typeof(Theme))]
-public class ThemeEditor : Editor
+namespace StyleSmith.Editor
 {
-    [SerializeField] private VisualTreeAsset visualTree;
-
-    private VisualElement _root;
-    private ListView _colorsListView;
-    private ListView _typographiesListView;
-    private Theme _theme;
-
-    public override VisualElement CreateInspectorGUI()
+    [CustomEditor(typeof(Theme))]
+    public class ThemeEditor : UEditor
     {
-        if (visualTree == null)
+        private readonly Regex backingFieldRegex = new(@"<([a-zA-Z][a-zA-Z0-9]*)>");
+
+        [CanBeNull] private Theme _theme;
+        private Dictionary<string, SerializedProperty> _properties;
+
+
+        private void OnEnable()
         {
-            _root = new VisualElement();
-
-            var horizontalContainer = CreateWarningBox("UXML not loaded, please put on the editor script!");
-
-            _root.Add(horizontalContainer);
-            return _root;
+            _theme = target as Theme;
+            _properties = GetProperties();
         }
 
-        _theme = target as Theme;
-        _root = visualTree.CloneTree();
-
-        _colorsListView = _root.Q<ListView>(nameof(Theme.Colors));
-        _typographiesListView = _root.Q<ListView>(nameof(Theme.Typographies));
-
-        _colorsListView.SetBinding(
-            nameof(_colorsListView.itemsSource),
-            new DataBinding { dataSourcePath = new PropertyPath(nameof(Theme.Colors)) }
-        );
-
-        _colorsListView.itemsSource = _theme.Colors;
-        _typographiesListView.itemsSource = _theme.Typographies;
-
-        SetupListView(_colorsListView, _theme.Colors);
-        SetupListView(_typographiesListView, _theme.Typographies);
-
-        return _root;
-    }
-
-    private static VisualElement CreateWarningBox(string message)
-    {
-        var horizontalContainer = new VisualElement();
-        horizontalContainer.AddToClassList("unity-help-box");
-        horizontalContainer.style.flexDirection = FlexDirection.Row;
-
-        horizontalContainer.style.paddingTop = 4;
-        horizontalContainer.style.paddingBottom = 4;
-        horizontalContainer.style.paddingLeft = 8;
-        horizontalContainer.style.paddingRight = 8;
-
-        horizontalContainer.style.marginTop = 4;
-        horizontalContainer.style.marginBottom = 4;
-
-        horizontalContainer.Add(new Label(message));
-        return horizontalContainer;
-    }
-
-    private void SetupListView<T>(ListView listView, OptionCollection<T> collection) where T : IOption, new()
-    {
-        listView.itemsSource = collection;
-
-        listView.itemsAdded += OnItemsAdded(collection);
-        listView.itemsRemoved += OnItemsRemoved(collection);
-
-        listView.RefreshItems();
-    }
-
-    private Action<IEnumerable<int>> OnItemsAdded<T>(OptionCollection<T> collection)
-        where T : IOption, new()
-    {
-        return indices =>
+        private Dictionary<string, SerializedProperty> GetProperties()
         {
-            foreach (var index in indices)
+            const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+            var fields = typeof(Theme).GetFields(bindingFlags);
+
+            var result = new Dictionary<string, SerializedProperty>(fields.Length);
+
+            foreach (var field in fields)
             {
-                var newItem = new T();
-                if (newItem is ColorOption colorOption)
+                string name = field.Name;
+                if (name.StartsWith("m_"))
                 {
-                    colorOption.Name = $"Color {collection.Count + 1}";
-                }
-                else if (newItem is TypographyOption typographyOption)
-                {
-                    typographyOption.Name = $"Typography {collection.Count + 1}";
+                    continue;
                 }
 
-                collection.Add(newItem);
+                if (backingFieldRegex.IsMatch(name))
+                {
+                    var matches = backingFieldRegex.Matches(name);
+                    name = matches[0].Groups[1].Value;
+                }
+
+                result[name] = serializedObject.FindProperty(field.Name);
             }
 
-            EditorUtility.SetDirty(_theme);
-        };
-    }
+            return result;
+        }
 
-    private Action<IEnumerable<int>> OnItemsRemoved<T>(OptionCollection<T> collection)
-        where T : IOption, new()
-    {
-        return indices =>
+        public override void OnInspectorGUI()
         {
-            var sortedIndices = new List<int>(indices);
-            sortedIndices.Sort((a, b) => b.CompareTo(a));
-
-            foreach (var index in sortedIndices)
+            if (_theme == null)
             {
-                if (index < collection.Count)
-                {
-                    var item = collection[index];
-                    collection.Remove(item);
-                }
+                RenderHelpBox("The theme scriptable object is not attached correctly!", MessageType.Error);
+                return;
             }
 
-            EditorUtility.SetDirty(_theme);
-        };
+            EditorGUILayout.PropertyField(_properties[nameof(Theme.Colors)]);
+            EditorGUILayout.PropertyField(_properties[nameof(Theme.Typographies)]);
+            
+            if(serializedObject.hasModifiedProperties)
+                serializedObject.ApplyModifiedProperties();
+        }
+
+        private void RenderHelpBox(string message, MessageType messageType = MessageType.Info)
+        {
+            using EditorGUILayout.HorizontalScope horizontalScope = new EditorGUILayout.HorizontalScope();
+            EditorGUILayout.HelpBox(message, messageType);
+        }
     }
 }

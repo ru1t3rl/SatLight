@@ -2,7 +2,7 @@ using StyleSmith.Runtime.Domain;
 using UnityEditor;
 using UnityEngine;
 
-namespace StyleSmith.Editor
+namespace StyleSmith.Editor.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(OptionCollection<>))]
     public class OptionCollectionPropertyDrawer : PropertyDrawer
