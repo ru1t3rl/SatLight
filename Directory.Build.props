@@ -1,0 +1,39 @@
+<Project>
+    <PropertyGroup>
+        <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+        <WarningsAsErrors />
+        <WarningsNotAsErrors />
+    </PropertyGroup>
+
+    <!-- Step 1: Check if project is in Unity directory -->
+    <PropertyGroup>
+        <IsUnityProject Condition="$(MSBuildProjectDirectory.Contains('SatLight.Unity'))">true</IsUnityProject>
+    </PropertyGroup>
+
+    <!-- Step 2: Disable Unity generators for NON-Unity projects -->
+    <PropertyGroup Condition="'$(IsUnityProject)' != 'true'">
+        <UseUnityScriptGenerator>false</UseUnityScriptGenerator>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    </PropertyGroup>
+
+    <!-- Step 3: Configure Unity projects - disable generators by default -->
+    <PropertyGroup Condition="'$(IsUnityProject)' == 'true'">
+        <UseUnityScriptGenerator>false</UseUnityScriptGenerator>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+        <EnableNETAnalyzers>false</EnableNETAnalyzers>
+        <RunUnitySourceGenerators>false</RunUnitySourceGenerators>
+
+        <DefineConstants>$(DefineConstants);UNITY_2022_3_OR_NEWER;UNITY_2022_3;UNITY_2022;UNITY_5_3_OR_NEWER</DefineConstants>
+        <UnityProjectType>Game</UnityProjectType>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <LangVersion>9.0</LangVersion>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
+
+    <!-- Step 4: Enable Unity generators ONLY for Assembly-CSharp -->
+    <PropertyGroup Condition="'$(IsUnityProject)' == 'true' AND '$(MSBuildProjectName)' == 'Assembly-CSharp'">
+        <UseUnityScriptGenerator>true</UseUnityScriptGenerator>
+        <RunUnitySourceGenerators>true</RunUnitySourceGenerators>
+    </PropertyGroup>
+</Project>

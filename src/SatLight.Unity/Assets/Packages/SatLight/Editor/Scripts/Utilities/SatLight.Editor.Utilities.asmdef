@@ -1,0 +1,23 @@
+{
+    "name": "SatLight.Editor.Utilities",
+    "rootNamespace": "SatLight.Editor.Utilities",
+    "references": [
+        "GUID:ac4cd4bb105ae983cabd1a8546c7df49",
+        "GUID:fd307a6651d277ceb84f8e4cc97344a0",
+        "GUID:e06bbaf7715c7251b952032a6355b676",
+        "GUID:64ff12e3e59de4a86912d4332344bb48",
+        "GUID:683c5dc183df8a680b0a24a3b98f67c7",
+        "GUID:e20817f5a030251baabb469fbc72e80b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

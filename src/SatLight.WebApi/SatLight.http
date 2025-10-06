@@ -1,0 +1,6 @@
+@SatLight_HostAddress = http://localhost:5261
+
+GET {{SatLight_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

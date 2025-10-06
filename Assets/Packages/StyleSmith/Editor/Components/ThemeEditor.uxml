@@ -1,8 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:Label text="Style Smith" name="Title" />
-    <ui:TextField label="Text Field" placeholder-text="filler text" name="Name" data-source-type="StyleSmith.Runtime.Domain.Theme, StyleSmith.Runtime.Domain" data-source-path="Name" />
-    <ui:Label text="Pallete" name="Palette" />
-    <ui:ListView item-template="project://database/Assets/Packages/StyleSmith/Editor/Components/ColorEntry.uxml?fileID=9197481963319205126&amp;guid=28c5ef11fdcdcc0299752d460987868b&amp;type=3#ColorEntry" name="Colors" show-border="true" show-add-remove-footer="true" reorderable="true" binding-source-selection-mode="AutoAssign" data-source-type="StyleSmith.Runtime.Domain.Theme, StyleSmith.Runtime.Domain" data-source-path="_Colors_k__BackingField" binding-path="Colors" />
-    <ui:Label text="Typography" enable-rich-text="true" name="Typography" />
-    <ui:ListView item-template="project://database/Assets/Packages/StyleSmith/Editor/Components/Typography.uxml?fileID=9197481963319205126&amp;guid=1ddfee68eef905b80a91b4b37af24e02&amp;type=3#Typography" name="Typographies" show-add-remove-footer="true" reorderable="true" show-foldout-header="false" horizontal-scrolling="false" show-border="true" binding-source-selection-mode="AutoAssign" data-source-type="StyleSmith.Runtime.Domain.Theme, StyleSmith.Runtime.Domain" data-source-path="_Typographies_k__BackingField" />
-</ui:UXML>

@@ -1,6 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
-    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
-        <ui:TextField label="Key" placeholder-text="Color" name="TextField" data-source-type="StyleSmith.Runtime.Domain.ColorOption, StyleSmith.Runtime.Domain" data-source-path="_Name_k__BackingField" binding-path="Name" style="width: 50%;" />
-        <uie:ColorField label="Color" value="#00FFFFFF" name="ColorField" data-source-type="StyleSmith.Runtime.Domain.ColorOption, StyleSmith.Runtime.Domain" data-source-path="_Value_k__BackingField" binding-path="Value" style="width: 50%;" />
-    </ui:VisualElement>
-</ui:UXML>

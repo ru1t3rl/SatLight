@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.0" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <UserSecretsId>0fd9fe53-8d6c-47c1-8edc-3b9d6b151273</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SatLight.Migrator\SatLight.Migrator.csproj" />
+    <ProjectReference Include="..\SatLight.WebApi\SatLight.WebApi.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="9.5.0" />
+    <PackageReference Include="Aspire.Hosting.Docker" Version="9.5.0-preview.1.25474.7" />
+    <PackageReference Include="Aspire.Hosting.Redis" Version="9.5.0" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.PostgreSQL.Extensions" Version="9.8.0" />
+    <PackageReference Include="Dutchskull.Aspire.Unity" Version="9.0.0" />
+    <PackageReference Include="TickerQ.Dashboard" Version="2.5.3" />
+  </ItemGroup>
+
+</Project>

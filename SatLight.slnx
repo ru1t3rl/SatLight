@@ -1,0 +1,43 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+  </Configurations>
+  <Folder Name="/Aspire/">
+    <Project Path="src\SatLight.AppHost\SatLight.AppHost.csproj" Type="Classic C#" />
+    <Project Path="src\SatLight.ServiceDefaults\SatLight.ServiceDefaults.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/">
+    <Project Path="src\SatLight.Unity\Assembly-CSharp-Editor.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\Assembly-CSharp.csproj" Type="Unity" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/N2YO/">
+    <Project Path="src\SatLight.Unity\N2YO.Editor.Controllers.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\N2YO.Runtime.Domain.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\N2YO.Runtime.Utilities.csproj" Type="Unity" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/Ru1t3rl/">
+    <Project Path="src\SatLight.Unity\Ru1t3rl.Editor.Utilities.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\Ru1t3rl.Runtime.Domain.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\Ru1t3rl.Runtime.Utilities.csproj" Type="Unity" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/SatLight/">
+    <Project Path="src\SatLight.Unity\SatLight.Editor.Utilities.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\SatLight.Runtime.Behaviours.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\SatLight.Runtime.Domain.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\SatLight.Runtime.Utilities.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\SatLight.Tests.csproj" Type="Unity" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/StyleSmith/">
+    <Project Path="src\SatLight.Unity\StyleSmith.Editor.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\StyleSmith.Runtime.Domain.csproj" Type="Unity" />
+  </Folder>
+  <Folder Name="/SatLight.Unity/TLE/">
+    <Project Path="src\SatLight.Unity\TLE.Editor.Controllers.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\TLE.Runtime.Controllers.csproj" Type="Unity" />
+    <Project Path="src\SatLight.Unity\TLE.Runtime.Domain.csproj" Type="Unity" />
+  </Folder>
+  <Project Path="src\SatLight.Domain\SatLight.Domain.csproj" Type="Classic C#" />
+  <Project Path="src\SatLight.Migrator\SatLight.Migrator.csproj" Type="Classic C#" />
+  <Project Path="src\SatLight.Services\SatLight.Services\SatLight.Services.csproj" Type="Classic C#" />
+  <Project Path="src\SatLight.WebApi\SatLight.WebApi.csproj" Type="Classic C#" />
+</Solution>
